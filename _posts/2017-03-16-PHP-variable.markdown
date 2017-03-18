@@ -72,14 +72,16 @@ typedef union _zvalue_value {
 
 
 变量类型 | zval.type | zval.value  
--------- | --------- | ----------  
-boolean  | IS_BOOL   | lval        
-integer | IS_LONG | lval   
-float | IS_DOUBLE | dval  
-null | IS_NULL | -  
-resource | IS_RESOURCE | lval  
-string | IS_STRING | str  
-array | IS_ARRAY | ht  
-object | IS_OBJECT | obj  
+:-------- | :--------- | :----------  
+**boolean**  | IS_BOOL   | lval        
+**integer** | IS_LONG | lval   
+**float** | IS_DOUBLE | dval  
+**null** | IS_NULL | -  
+**resource** | IS_RESOURCE | lval  
+**string** | IS_STRING | str  
+**array** | IS_ARRAY | ht  
+**object** | IS_OBJECT | obj  
 
-每种变量的存储，以及相应存储字段如上表所示。下一节我们着重展开HashTable的分析。
+
+每种变量的存储，以及相应存储字段如上表所示。下一节我们着重展开HashTable的分析。  
+
