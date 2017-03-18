@@ -70,3 +70,16 @@ typedef union _zvalue_value {
 ```  
 `zvalue_value`是一个union的结构，相对于struct，union能够节省更多的内存空间，降低PHP的内存占用。另外，从结构中可以看到：`lval`用来保存整数值；`dval`用来保存浮点数值；`str`用来指向字符串的位置并记录长度；`ht`用来存放一个hash表，例如数组等；`obj`则用来存放对象。每个变量的值都存储在这个数据结构中。  
 
+
+变量类型 | zval.type | zval.value  
+-------- | --------- | ----------  
+boolean  | IS_BOOL   | lval        
+integer | IS_LONG | lval   
+float | IS_DOUBLE | dval  
+null | IS_NULL | -  
+resource | IS_RESOURCE | lval  
+string | IS_STRING | str  
+array | IS_ARRAY | ht  
+object | IS_OBJECT | obj  
+
+每种变量的存储，以及相应存储字段如上表所示。下一节我们着重展开HashTable的分析。
