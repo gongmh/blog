@@ -41,7 +41,7 @@ web服务需要重启php-fpm
 ### 5. 示例  
 
 示例代码
-``` php
+``` php  
 //test.php
 <?php 
 testXdebug(); 
@@ -59,7 +59,7 @@ profile分析效果：
 
 ![pic](https://gongmh.github.io/source/blog/pic/xdebug.png)  
 
-[profile文件](://gongmh.github.io/source/blog/file/cachegrind.out.27457)
+[profile文件](https://gongmh.github.io/source/blog/file/cachegrind.out.27457)
 
 
 ### 5. 扩展资料
