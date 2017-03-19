@@ -36,7 +36,27 @@ web服务需要重启php-fpm
 现在每次调用php脚本，就会自动在`YOU_WANT_TO_SAVE_PATH/xdebug-output`生成相应的新能数据文件。
 
 ### 4. 分析性能文件  
-性能文件可以使用专门的工具（win/mac下可以使用QCacheGrind，linux下可以使用KCacheGrind）。以QCacheGrind为例，界面左侧"Flat Profile"展示函数调用列表，`Incl.`包括子函数的调用时间，`Self`为去除子函数后自身消耗的时间i。  
+性能文件可以使用专门的工具（win/mac下可以使用QCacheGrind，linux下可以使用KCacheGrind）。以QCacheGrind为例，界面左侧"Flat Profile"展示函数调用列表，`Incl.`包括子函数的调用时间，`Self`为去除子函数后自身消耗的时间。  
+
+### 5. 示例  
+
+示例代码
+``` php
+//test.php
+<?php 
+testXdebug(); 
+function testXdebug() { 
+    require_once('abc.php'); 
+}
+
+//abc.php
+<?php
+    echo "hello";
+
+```  
+
+profile分析效果：
+
 ![pic](https://gongmh.github.io/source/blog/pic/xdebug.png)  
 
 [profile文件](://gongmh.github.io/source/blog/file/cachegrind.out.27457)
