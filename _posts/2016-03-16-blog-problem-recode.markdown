@@ -95,8 +95,10 @@ Water: H<sub>2</sub>O
   \  ## H2 header  
 ```  
 
-15. 字体
-<font color=#0099ff size=12 face="黑体">黑体</font>
+15. 字体  
+<font color=#0099ff size=12 face="黑体">黑体</font>  
+
+
 ## 2. 问题记录
 #### 2.1 安装jekyll
 
