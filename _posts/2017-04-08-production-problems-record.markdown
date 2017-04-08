@@ -20,16 +20,16 @@ description: ""
     * 对于必须要求先写再读的业务逻辑，可以联系dba，让这部分的读分发到主库。  
 
 ### 2. php curl的毫秒级超时问题  
-php业务中对外请求时，我们会设置超时时间，如果是秒级的超时，我们这样设置是没问题的：
-    ``` php  
-        $timeout = 2; //2s超时
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout); //连接超时
-        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);    //处理超时
+php业务中对外请求时，我们会设置超时时间，如果是秒级的超时，我们这样设置是没问题的：  
+    ``` php   
+        $timeout = 2; //2s超时  
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout); //连接超时  
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);    //处理超时  
     ```  
 但是实际业务中常常需要设置毫秒级的超时时间，例如`$timeout = 0.1;//100ms超时`再用上面的语句就会有问题了，你会发现超时时间根本没起作用。原因见[ Curl的毫秒超时的一个”Bug”](http://www.laruence.com/2014/01/21/2939.html)。如果需要毫秒级超时，必须设置CURLOPT_NOSIGNAL参数。  
-    ``` php
-        $timeout = 0.1;//100ms超时
-        curl_setopt($ch, CURLOPT_NOSIGNAL, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, $timeout * 1000);
-        curl_setopt($ch, CURLOPT_TIMEOUT_MS, $timeout * 1000);
-    ```
+    ``` php  
+        $timeout = 0.1;//100ms超时  
+        curl_setopt($ch, CURLOPT_NOSIGNAL, true);  
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, $timeout * 1000);  
+        curl_setopt($ch, CURLOPT_TIMEOUT_MS, $timeout * 1000);  
+    ```  
