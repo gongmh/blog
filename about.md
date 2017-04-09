@@ -1,15 +1,9 @@
 ---
 layout: page
-title: 关于
+title: ...
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+> 纸上得来终觉浅，绝知此事要躬行。  
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+写博客的目的是记录一些工作中遇到的问题，为以后的工作提升效率，规避雷区。
