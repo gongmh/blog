@@ -26,7 +26,7 @@ $ composer
 ```  
 ### 3. 使用
 
-3.1  创建`composer.json`文件  
+#### 3.1  创建`composer.json`文件  
 在项目根目录中创建`composer.json`文件
 ``` json  
 {
@@ -36,7 +36,7 @@ $ composer
 }
 ```   
 
-3.2 执行composer安装依赖  
+#### 3.2 执行composer安装依赖  
 在项目根目录执行命令：  
 ```  
 $ composer install
@@ -45,7 +45,7 @@ composer会自动帮我们下载依赖，结构如下:
 ![pic](https://gongmh.github.io/source/blog/pic/php-composer-001.jpg)  
 这时我们的项目中还会出现`composer.lock`文件，`composer.lock`文件中记录着依赖的版本号等信息。我们需要将该文件也提交到我们代码库中，这样任何人建立项目都是用的完全相同的依赖。  
 
-3.3 使用已安装的库  
+#### 3.3 使用已安装的库  
 composer会自动帮我们生成`vendor/autoload.php`文件。我们只需引入这个文件，就能自动加载相应的库。
 ``` php  
 require 'vendor/autoload.php';
