@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "java web在mac出现bogon问题"
+title:  "mac出现bogon问题"
 date:  "2017-06-15 07:18:40 +0800"
 category: production
-tags: java
-keywords: java
+tags: mac
+keywords: mac
 description: ""
 ---
 
