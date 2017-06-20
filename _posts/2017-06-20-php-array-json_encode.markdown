@@ -54,9 +54,10 @@ description: ""
 
 ### 二、php中json_encode的表示
 
-[php manual](http://www.php.net/manual/en/function.json-encode.php)  
-> Note: When encoding an array, if the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
+> Note: When encoding an array, if the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.  --by [php manual](http://www.php.net/manual/en/function.json-encode.php)
 
 也就是说php的数组做json_encode的时候，只有数组的下标是从0开始的连续整数，才会json为列表形式；其他情况都是对象形式。	
+
+因此，针对php数组json_encode时，需要数组形式的话就重新排序一下数组即可。
 
 
