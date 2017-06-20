@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "php有用的一些功能函数"
+title:  "php常用功能函数总结"
 date:  "2017-06-19 07:18:40 +0800"
 category: production
 tags: php
@@ -11,7 +11,7 @@ description: ""
 * TOC  
 {:toc}  
 
-### 数组相关：  
+### 一、数组相关：  
 #### 1. 数组获取key(array_keys)  
 
 ```
@@ -278,13 +278,32 @@ print_r($arr);
 // )
 ```
 
+#### 12. 数组中所有值出现次数（array_count_values）
 
-### 字符串相关  
+```
+$arr = array(
+    'a' => '3',
+    'b' => '2',
+    'c' => '2',
+    'd' => '4',
+);
+
+print_r(array_count_values($arr));
+
+// Array
+// (
+//     [3] => 1
+//     [2] => 2
+//     [4] => 1
+// )
+```
+
+### 二、字符串相关  
 #### 1. implode
 #### 2. explode
 #### 3. strstr
 #### 4. 
 
-### 其他  
+### 三、其他  
 
 1. array_sum(unpack('C*', $metric)
