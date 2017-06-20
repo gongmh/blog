@@ -18,7 +18,7 @@ description: ""
 #### 1. JSON概念
 [json](https://zh.wikipedia.org/wiki/JSON)是一种轻量级的数据交换文本格式。
 
-#### 2. JSON数据结构(rfc4627)[http://www.ietf.org/rfc/rfc4627.txt]
+#### 2. JSON数据结构[rfc4627](http://www.ietf.org/rfc/rfc4627.txt)
 
 1. 对象（object）
 
@@ -54,7 +54,7 @@ description: ""
 
 ### 二、php中json_encode的表示
 
-(php manual)[http://www.php.net/manual/en/function.json-encode.php]> Note:
+(php manual)[http://www.php.net/manual/en/function.json-encode.php]  > Note:
 When encoding an array, if the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
 
 也就是说php的数组做json_encode的时候，只有数组的下标是从0开始的连续整数，才会json为列表形式；其他情况都是对象形式。	
