@@ -23,7 +23,11 @@ description: ""
 4. 启动samba服务  
 		`[gongmh@localhost ~]$ sudo service smb start`  
 		`[gongmh@localhost ~]$ service smb status`
-5. 处理权限限制  r
+5. 处理权限限制(防火墙问题根据实际情况配置)  
+		```
+		service iptables stop
+		setenforce 0
+		```
 
 ### windows处理  
 1. 创建【映射网络驱动器】  
