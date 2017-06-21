@@ -208,6 +208,8 @@ print_r(array_unique($arr));
 // )
 ```
 
+注意：当几个数组元素的值相等时，只保留第一个元素，其他的元素被删除。
+
 #### 9. 数组替换(array_replace)
 
 ```
@@ -297,6 +299,55 @@ print_r(array_count_values($arr));
 //     [4] => 1
 // )
 ```
+
+#### 13. 数组填充（array_fill）
+
+```
+print_r(array_fill(3, 6, 'filled'));
+
+// Array
+// (
+//     [3] => filled
+//     [4] => filled
+//     [5] => filled
+//     [6] => filled
+//     [7] => filled
+//     [8] => filled
+// )
+```
+
+#### 14. 数组去重（array_flip）
+
+```
+$arr = array(
+    'a' => 'first',
+    'b' => 'second',
+    'c' => 'third',
+    'd' => 'fourth',
+    'e' => 'fourth',
+);
+
+print_r(array_flip(array_flip($arr)));
+// 注意与array_unique的区别
+// Array
+// (
+//     [a] => first
+//     [b] => second
+//     [c] => third
+//     [e] => fourth
+// )
+print_r(array_unique($arr));
+// Array
+// (
+//     [a] => first
+//     [b] => second
+//     [c] => third
+//     [d] => fourth
+// )
+
+```
+
+注意：函数返回一个反转后的数组，如果同一值出现了多次，则最后一个键名将作为它的值，所有其他的键名都将丢失。
 
 ### 二、字符串相关  
 #### 1. implode
