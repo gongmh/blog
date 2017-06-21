@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "linux下字符串和文件的md5值计算"
-date:  "2017-06-19 07:18:40 +0800"
-category: production
-tags: php
-keywords: php
+date:  "2017-06-21 00:18:40 +0800"
+category: linux
+tags: md5
+keywords: md5
 description: ""
 ---
 
