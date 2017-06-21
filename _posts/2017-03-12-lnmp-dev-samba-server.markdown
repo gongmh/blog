@@ -25,7 +25,7 @@ description: ""
 		`[gongmh@localhost ~]$ service smb status`
 5. 处理权限限制(防火墙问题根据实际情况配置)  
 		```
-		service iptables stop
+		service iptables stop  
 		setenforce 0
 		```
 
