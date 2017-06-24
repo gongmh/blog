@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "LNMP开发--samba服务"
+title:  "samba服务"
 date:  "2017-03-12 08:30:40 -0700"
 category: lnmp
 tags: samba
