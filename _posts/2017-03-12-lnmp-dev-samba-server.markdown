@@ -13,7 +13,7 @@ description: ""
 
 本文以centos为例，配置samba服务。  
 
-### centos处理  
+### 1 centos处理  
 1. centos安装samba  
 		`[gongmh@localhost ~]$ sudo yum install samba `  
 2. 添加samba用户  
@@ -29,7 +29,7 @@ description: ""
 		setenforce 0
 		```
 
-### windows处理  
+### 2 windows处理  
 1. 创建【映射网络驱动器】  
 	![pic](https://gongmh.github.io/source/blog/pic/lnmp-samba-001.png)  
 
@@ -40,3 +40,12 @@ description: ""
 	![pic](https://gongmh.github.io/source/blog/pic/lnmp-samba-003.png)  
 
 (done)
+
+（add 2017-06-24）
+### 扩展
+1. 验证samba是否成功安装
+`smbclient -L host //Get a list of shares available on a host`  
+
+2. 验证smb.conf文件是否正确
+`testparm smb_conf_path -s`
+
