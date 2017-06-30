@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Redis源码分析(001)--util.c"
-date:  "2017-06-21 00:18:40 +0800"
+date:  "2017-06-30 00:18:40 +0800"
 category: Redis
 tags: Redis
 keywords: Redis
@@ -13,10 +13,11 @@ description: ""
 
 ### 1 函数stringmatchlen
 
-（1）Glob-style规则  
-	![pic](https://gongmh.github.io/source/blog/pic/redis-stringmatchlen.png)  
+规则说明和分析
 
-	[xmind](https://gongmh.github.io/source/blog/file/redis-stringmatchlen.xmid)
+![pic](https://gongmh.github.io/source/blog/pic/redis-stringmatchlen.png)  
+
+[xmind](https://gongmh.github.io/source/blog/file/glob-stringmatchlen.xmind)
 
 ```
 /* Glob-style pattern matching. */
