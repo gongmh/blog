@@ -1,0 +1,4 @@
+1.git 回滚到某一个版本
+	git reset —hard a137c7923d772ffc7065439f73412976902a1f5d
+	
+	git push -f origin master    (强制提交)

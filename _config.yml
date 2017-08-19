@@ -22,8 +22,12 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Build settings
 markdown: kramdown
 theme: minima
+
+# 
+paginate: 8
+paginate_path: "blog/page:num"
+
 gems:
   - jekyll-feed
-exclude:
-  - Gemfile
-  - Gemfile.lock
+  - jekyll-paginate
+
