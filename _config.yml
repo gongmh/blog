@@ -16,7 +16,7 @@
 title: GongMH's Blog
 email: gongmh_work@126.com
 description: "Action speak louder than words."
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
