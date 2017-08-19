@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+    {% include head.html %} 
+    
+  <body>
+
+    {% include nav.html %} 
+
+ 
+    <div class="container">
+     <div class="row">
+       <div class="col-md-15">
+        <!-- Title -->
+        <h2>
+          {{ page.title }}
+          <div class="post-date">
+        	<span class="glyphicon glyphicon-time"></span>
+        	{{ page.date | date:"%Y-%m-%d" }}
+          <br>
+          <br>
+          <span class="glyphicon glyphicon-user"></span>
+          {%if page.author%} {{ page.author}} {% else %}  gongmh  {%endif%}
+          </div>
+        </h2>
+        <hr>
+    
+        {{ content }}
+    
+        <br/>
+        
+        <!-- next and previous -->
+        <div style="margin-top:15px; margin-bottom:10px">
+          {%if page.previous%}
+          <span class="next">
+            上篇：
+            <a href="{{site.baseurl}}{{page.previous.url}}">
+              {{page.previous.title}}
+            </a>
+          </span>
+          {%endif%} 
+          {%if page.next%}
+          <div style="float:right">
+          <span class="prev" >
+            下篇：
+            <a href="{{site.baseurl}}{{page.next.url}}">
+              {{page.next.title}}
+            </a>
+          </span>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+     </div>
+    </div>
+    <hr>
+
+    {% include footer.html %} 
+
+  </body>
+</html>
+

@@ -1,7 +1,5 @@
 ---
-layout: page
-title: ...
-permalink: /about/
+layout: about
 ---
 
 > 纸上得来终觉浅，绝知此事要躬行。  
