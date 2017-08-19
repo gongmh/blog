@@ -24,8 +24,8 @@ markdown: kramdown
 theme: minima
 
 # 
-paginate: 8
-paginate_path: "blog/page:num"
+paginate: 10
+paginate_path: "page:num"
 
 gems:
   - jekyll-feed
