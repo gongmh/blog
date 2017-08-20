@@ -1,0 +1,79 @@
+---
+layout: post
+title:  "UNIX I/O总结"
+date:  "2017-08-20 00:18:40 +0800"
+category: interview
+tags: interview
+keywords: interview
+description: ""
+---
+
+0. io相关概念
+《unix环境高级编程》
+文件I/O函数--打开文件、读文件、写文件等操作。UNIX系统中大多数文件I/O只需用到5个函数：open、read、write、lseek以及close。
+
+1. 文件I/O
+1.1 不带缓冲的I/O（unbuffered I/O）
+`不带缓冲`是指每个read和wirte都调用内核中的一个系统调用。
+
+1.3 文件描述符
+文件描述符是一个非负整数，当打开一个现有文件或创建一个新文件时，内核向进程返回一个文件描述符。
+UNIX系统使用文件描述符0与进程的标准输入相关联，文件描述符1与标准输出相关联，文件描述符2与标准输出相关联。
+在`<unistd.h>`中，幻数0、1、2分别定义为符号常量STDIN_FILENO、STDOUT_FILENO和STDERR_FILENO。文件描述符的变化范围是0~OPEN_MAX（每个进程打开的最大文件数）。
+OPEN_MAX已被移除（http://linux.derkeiler.com/Mailing-Lists/Kernel/2007-03/msg05461.html）
+http://blog.csdn.net/CMbug/article/details/48313107
+
+1.4 open函数
+调用open函数可以打开或创建一个文件。
+
+``` c
+#include <fcntl.h>
+
+int open(const char *pathname, int oflag, ... /* mode_t mode */);
+
+```
+将第三个参数写为`...`，ISO C用这种方法表明余下参数的数量及其类型根据具体的调用会有所不同。对于open函数而言，仅当创建新文件时才使用第三个参数。
+
+pathname是要打开或创建文件的名名字，
+oflag参数用来说明打开方式，用下面一个或多个常量『或』运算构成oflag参数。
+
+<table border="1" cellpadding="12" width="200">
+    <tr>  <td>O_RDONLY</td>  <td>只读打开</td> </tr>
+
+    <tr> <td>O_WRONLY</td> <td>只写打开</td> </tr>
+    
+    <tr> <td>O_RDWR</td> <td>读、写打开</td> </tr>
+</table>
+
+
+这三个常量中必须指定一个且只能指定一个，下面的常量则是可选的：
+
+<table border="1" cellpadding="30" width="400">
+    <tr> <td>O_APPEND</td>  <td>每次写时都追加到文件的尾端</td> </tr>
+    <tr> <td>O_CREAT</td>  <td>若此文件不存在，则创建它</td> </tr>
+    <tr> <td>o_EXCL</td>  <td>每次写时都追加到文件的尾端</td> </tr>
+    <tr> <td>O_TRUNC</td>  <td>每次写时都追加到文件的尾端</td> </tr>
+    <tr> <td>O_NOCTTY</td>  <td>每次写时都追加到文件的尾端</td> </tr>
+    <tr> <td>O_NONBLOCK</td>  <td>每次写时都追加到文件的尾端</td> </tr>
+</table>
+
+1.5 creat函数
+1.6 close函数
+1.7 lseek函数
+1.8 read函数
+1.9 write函数
+
+2. 标准I/O
+
+3. 高级I/O
+
+
+2.socket通信
+
+3.io多路复用
+
+4.select/poll/epoll
+
+5.事件驱动
+
+6.redis事件相关

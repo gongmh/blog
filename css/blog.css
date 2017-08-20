@@ -8,7 +8,7 @@ footer {
 }
 
 .post-date{
-	float:lift;
+	float:left;
 	padding:5px;
 	font-size:12px
 }
@@ -17,3 +17,11 @@ footer {
 	padding:5px;
 	font-size:12px
 }
+
+.post-table{
+	padding:1px 1px 1px 40px;
+}
+
+.div-inline{ 
+	display:inline
+} 
