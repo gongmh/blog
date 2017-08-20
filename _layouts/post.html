@@ -14,15 +14,15 @@
         <!-- Title -->
         <h2>
           {{ page.title }}
-          <div class="post-date">
-        	<span class="glyphicon glyphicon-time"></span>
-        	{{ page.date | date:"%Y-%m-%d" }}
-          <br>
-          <br>
+        </h2>
+        <br/>
+        <div class="post-date">
           <span class="glyphicon glyphicon-user"></span>
           {%if page.author%} {{ page.author}} {% else %}  gongmh  {%endif%}
-          </div>
-        </h2>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="glyphicon glyphicon-time"></span>
+          {{ page.date | date:"%Y-%m-%d" }}
+        </div>
         <hr>
     
         {{ content }}
