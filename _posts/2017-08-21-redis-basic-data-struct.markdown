@@ -70,16 +70,18 @@ static inline char sdsReqType(size_t string_size) {
 
 2.3 知识点
 
-```
+``` c
 #define SDS_HDR_VAR(T,s) struct sdshdr##T *sh = (void*)((s)-(sizeof(struct sdshdr##T)));
+
+//注意无分号
 #define SDS_HDR(T,s) ((struct sdshdr##T *)((s)-(sizeof(struct sdshdr##T))))
 ```
 
-	在c语言中，define中的'##'表示连接的意思。
+	在c语言中，define中的'##'表示连接的意思。例如SDS_HDR_VAR(8,s)
 
-`SDS_HDR_VAR(T,s)`表示根据s，定义指针sh，并初始化指向实际sds的起始地址
+`SDS_HDR_VAR(T,s)`表示根据s，定义指针sh，并初始化指向实际sds的起始地址，用法：SDS_HDR_VAR(16,s);
 
-`SDS_HDR(T,s)`表示一个指向实际sds的起始地址的指针
+`SDS_HDR(T,s)`表示一个指向实际sds的起始地址的指针，用法：SDS_HDR(32,s)->len;
 
 2.4 重要api
 
