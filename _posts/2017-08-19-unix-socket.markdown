@@ -17,7 +17,7 @@ description: ""
 
 #### 2. 套接字描述符
 
-套接字是通信端点的抽象。与应用程序要使用文件描述符访问文件一样，访问套接字也许要用套接字描述符。套接字描述符在UNIX系统是用文件描述符实现的。事实上，许多处理文件描述符的函数（如read和write）都可以处理套接字描述符。
+套接字是通信端点的抽象。与应用程序要使用文件描述符访问文件一样，访问套接字也需要用套接字描述符。套接字描述符在UNIX系统是用文件描述符实现的。事实上，许多处理文件描述符的函数（如read和write）都可以处理套接字描述符。
 
 要创建一个套接字，可以使用sockrt函数。该函数成功则返回文件（套接字）描述符，失败则返回-1.
 
@@ -66,7 +66,7 @@ int socket(int domain, int type, int protocol);
 
 套接字通信是双向的，可以通过函数`shutdown`来禁止套接字的输入/输出。该函数成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int shutdown(int sockfd, int how);
@@ -79,7 +79,7 @@ int shutdown(int sockfd, int how);
 
 在服务端，可以用bind函数将地址绑定到一个套接字。该函数成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int bind(int sockfd, const struct sockaddr *addr, socketlen_t len);
@@ -96,7 +96,7 @@ int bind(int sockfd, const struct sockaddr *addr, socketlen_t len);
 
 可以调用函数getsockname来获取绑定到一个套接字的地址。成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int getsockname(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict alenp);
@@ -106,7 +106,7 @@ int getsockname(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict 
 
 如果套接字已经和对方连接，调用getpeername来获取对方地址。该函数成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int getpeername(int sockfd, struct sockaddr * restrict addr, socklen_t *erstrict alenp);
@@ -118,7 +118,7 @@ int getpeername(int sockfd, struct sockaddr * restrict addr, socklen_t *erstrict
 
 如果是面向连接的网络服务（SOCK_STREAM或SOCK_SEQPACKET），在开始交换数据之前，需要在请求服务的进程套接字（客户端）和提供服务的进程套接字（服务器）之间建立一个连接。可以使用connect建立连接。该函数成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int connect(int sockfd, const struct sockaddr *addr, socklen_t len);
@@ -130,7 +130,7 @@ int connect(int sockfd, const struct sockaddr *addr, socklen_t len);
 
 服务器调用listen来宣告可以接受连接请求。该函数成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int listen(int sockfd, int backlog);
@@ -142,7 +142,7 @@ int listen(int sockfd, int backlog);
 
 一旦服务器调用了listen，套接字就能接收连接请求。使用accept函数来获得连接请求并建立连接。该函数成功返回文件（套接字）描述符，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int accept(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict len);
@@ -160,7 +160,7 @@ int accept(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict len);
 
 最简单的是send函数，可以指定标志来改变出来传输数据的方式。该函数成功返回发送的字节数，失败返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 ssize_t send(int sockfd, const void *buf, size_t nbytes, int flags);
@@ -184,7 +184,7 @@ ssize_t send(int sockfd, const void *buf, size_t nbytes, int flags);
 
 函数sendto和send很类似，区别在于sendto允许在无连接的套接字上指定一个目标地址。该函数成功返回发送的字节数，失败返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 ssize_t sendto(int sockfd, const void *buf, size_t nbytes, int flags, const struct sockaddr *destaddr, socklen_t destlen);
@@ -194,7 +194,7 @@ ssize_t sendto(int sockfd, const void *buf, size_t nbytes, int flags, const stru
 
 可以调用带有msghdr结构的sendmsg来指定多重缓冲区传输数据。该函数成功返回发送的字节数，失败返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 ssize_t sendmsg(int sockfd, const struct msghdr *msg, size_t nbytes, int flags);
@@ -202,7 +202,7 @@ ssize_t sendmsg(int sockfd, const struct msghdr *msg, size_t nbytes, int flags);
 
 接收数据可以使用recv函数。成功返回以字节计数的消息长度，若无可用消息或者对方已经按序结束则返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 ssize_t recv(int sockfd, void * buf, size_t nbytes, int flags);
@@ -227,7 +227,7 @@ ssize_t recv(int sockfd, void * buf, size_t nbytes, int flags);
 
 接收数据，recvfrom函数可以获取数据发送者的源地址。成功返回以字节计数的消息长度，若无可用消息或者对方已经按序结束则返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 ssize_t recvfrom(int sockfd, void *restrict buf, size_t len, int flags, struct sockaddr *restrict addr, socklen_t * restrict addrlen);
@@ -237,7 +237,7 @@ ssize_t recvfrom(int sockfd, void *restrict buf, size_t len, int flags, struct s
 
 为了将接收到的数据送入多个缓冲区，或者希望接收辅助数据，可以使用recvmsg。
 
-```
+``` c
 #include <sys/socket.h>
 
 ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
@@ -255,7 +255,7 @@ ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
 
 setsockopt用来设置选项，成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int setsockopt(int sockfd, int level, int option, const void *val, socklen_t len);
@@ -263,7 +263,7 @@ int setsockopt(int sockfd, int level, int option, const void *val, socklen_t len
 
 getsockopt用来设置选项，成功返回0，失败则返回-1。
 
-```
+``` c
 #include <sys/socket.h>
 
 int getsockopt(int sockfd, int level, int option, void *restrict val, socklen_t *restirct lenp);
