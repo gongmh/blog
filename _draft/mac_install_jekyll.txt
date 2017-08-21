@@ -1,0 +1,22 @@
+mac安装jekyll
+
+1.升级ruby（jekyll需要ruby版本>= 2.1.0，mac自带为2.0.0p648）
+（1）安装rvm
+	curl -L get.rvm.io | bash -s stable  
+	source ~/.zshrc
+	rvm -v  
+
+（2）升级ruby
+	ruby -v  
+	rvm list known
+	rvm install 2.1
+	rvm use ruby-2.1 --default
+	ruby -v
+
+2.安装jekyll
+
+	gem install jekyll
+
+3.启动jekyll
+
+	jekyll s

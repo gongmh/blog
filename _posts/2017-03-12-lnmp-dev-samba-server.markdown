@@ -44,8 +44,10 @@ description: ""
 （add 2017-06-24）
 ### 扩展
 1. 验证samba是否成功安装
+
 `smbclient -L host //Get a list of shares available on a host`  
 
 2. 验证smb.conf文件是否正确
+
 `testparm smb_conf_path -s`
 
