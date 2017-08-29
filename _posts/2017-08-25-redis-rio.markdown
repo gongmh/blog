@@ -1,0 +1,176 @@
+---
+layout: post
+title:  "Redis源码分析(004)--rio"
+date:  "2017-08-25 00:18:40 +0800"
+category: redis
+tags: redis
+keywords: redis
+description: ""
+---
+
+
+
+### 1 引言
+
+在redis中，**RIO**是对面向流的I/O的简单抽象。rio提供统一的read（从流中读数据）、write（将数据写入流）、tell（获取当前的偏移）等方法。rio实现了以下三种io：`Buffer I/O`（内存I/O）、`Stdio file pointer`（标准文件）和`File descriptors set`（socket）。在选择相应的初始化后，就可以使用统一的方法对I/O进行操作。
+
+### 2 数据结构
+
+一个`rio`对象主要包含：
+* union型的数据块（记录每种I/O数据）；
+* 函数指针（设置read、write等函数）；
+* 通用变量（包含当前的校验和、字节数等信息）。
+
+具体结构如下：
+
+``` c
+struct _rio {
+    //统一功能函数指针
+    size_t (*read)(struct _rio *, void *buf, size_t len);
+    size_t (*write)(struct _rio *, const void *buf, size_t len);
+    off_t (*tell)(struct _rio *);
+    int (*flush)(struct _rio *);
+
+    //更新校验和函数指针：计算到目前为止所有读写的校验和
+    void (*update_cksum)(struct _rio *, const void *buf, size_t len);
+
+    //记录当前校验和
+    uint64_t cksum;
+
+    //记录读/写的字节数
+    size_t processed_bytes;
+
+    //一次读写块的最大值
+    size_t max_processing_chunk;
+
+    //每种io类型独有的变量
+    union {
+        //内存buffer
+        struct {
+            sds ptr;
+            off_t pos;
+        } buffer;
+
+        //标准文件
+        struct {
+            FILE *fp;
+            off_t buffered; //到上次fsync，写入的字节数
+            off_t autosync; //autosync之后的fsync写入的字节数
+        } file;
+
+        //多个fd集合(写多个socket)
+        struct {
+            int *fds;       //所有的fd
+            int *state;     //每个fd的状态
+            int numfds;
+            off_t pos;
+            sds buf;
+        } fdset;
+    } io;
+};
+
+typedef struct _rio rio;
+```
+
+### 3. 统一接口
+
+rio提供了`rioWrite`、`rioRead`、`rioTell`和`rioFlush`等统一封装的函数，在函数内部调用具体的实现函数。
+
+并且，rio给出每种I/O的初始化函数，用来设置rio对象的信息。当初始化rio后，就可以对该rio对象进行读写等操作。
+
+``` c
+//将buf写入rio
+static inline size_t rioWrite(rio *r, const void *buf, size_t len) {
+    while (len) {
+        size_t bytes_to_write = (r->max_processing_chunk && r->max_processing_chunk < len) ? r->max_processing_chunk : len;
+        if (r->update_cksum) r->update_cksum(r,buf,bytes_to_write);
+        if (r->write(r,buf,bytes_to_write) == 0)
+            return 0;
+        buf = (char*)buf + bytes_to_write;
+        len -= bytes_to_write;
+        r->processed_bytes += bytes_to_write;
+    }
+    return 1;
+}
+
+//从rio中读出到buf
+static inline size_t rioRead(rio *r, void *buf, size_t len) {
+    while (len) {
+        size_t bytes_to_read = (r->max_processing_chunk && r->max_processing_chunk < len) ? r->max_processing_chunk : len;
+        if (r->read(r,buf,bytes_to_read) == 0)
+            return 0;
+        if (r->update_cksum) r->update_cksum(r,buf,bytes_to_read);
+        buf = (char*)buf + bytes_to_read;
+        len -= bytes_to_read;
+        r->processed_bytes += bytes_to_read;
+    }
+    return 1;
+}
+
+//获取当前的offset
+static inline off_t rioTell(rio *r) {
+    return r->tell(r);
+}
+
+//刷新当前rio
+static inline int rioFlush(rio *r) {
+    return r->flush(r);
+}
+
+//初始化为文件
+void rioInitWithFile(rio *r, FILE *fp);
+
+//初始化为内存buffer
+void rioInitWithBuffer(rio *r, sds s);
+
+//初始化为多个socket fd
+void rioInitWithFdset(rio *r, int *fds, int numfds);
+```
+
+### 3 I/O具体实现
+
+
+`Buffer I/O`是维护在内存的sds变量，任何的操作都是是对内存变量的。对buffer io做flush将不做任何操作。
+
+
+`Stdio file pointer`是对磁盘文件的封装，封装了`stdio.h`中的相关文件操作，对外提供api。
+
+
+`File descriptors set`是对多个socket fd进行写入操作，不支持读取操作。当执行flush时，清空缓存中的内容。
+
+
+### 4 其他知识点
+
+#### 4.1 UNUSED宏定义
+
+在redis中很多地方都会用到`UNUSED`这个宏，`UNUSED`这个宏的主要用途就是抑制c编译器的未使用变量的warning。
+具体可以参考["unused parameter" warnings in C](https://stackoverflow.com/questions/3599160/unused-parameter-warnings-in-c)
+
+``` c
+/* Anti-warning macro... */
+#define UNUSED(x) (void)(x)
+```
+
+#### 4.2 fflush与fsync区别
+
+在文件io中，写入文件伪代码如下:
+
+``` c
+static size_t rioFileWrite(rio *r, const void *buf, size_t len) {
+    
+    retval = fwrite(buf,len,1,r->io.file.fp);
+    
+    fflush(r->io.file.fp);
+    fsync(fileno(r->io.file.fp));
+
+    return retval;
+}
+```
+
+其中调用了`fflush`和`fsync`，二者区别如下：
+
+``` c
+fflush(FILE *); //c标准库函数，从c库缓存到内核缓冲区
+fsync(int fd);  //系统调用，从内核缓冲区写入到磁盘
+```
+
