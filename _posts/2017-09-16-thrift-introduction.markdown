@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "thrift介绍"
+title:  "Thrift介绍"
 date:  "2017-09-16 23:09:40 +800"
-category: lnmp
-tags: tools
-keywords: tools
+category: Thrift
+tags: Thrift
+keywords: Thrift
 description: ""
 ---
 
@@ -13,15 +13,16 @@ description: ""
 {:toc} 
 
 
-本文内容来自[Apache Thrift](http://thrift.apache.org/)，主要目的是为了学习总结。
+
+本文内容来自[Apache Thrift](http://Thrift.apache.org/)，主要目的是为了学习总结。
 
 ### 1.介绍
 
-thrift是
+[Thrift](https://zh.wikipedia.org/wiki/Thrift)是一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。
 
-### 2.thrift结构
+### 2.Thrift结构
 
-thrift的网络栈如下所示：
+Thrift的网络栈如下所示：
 
 ```
   +-------------------------------------------+
@@ -51,7 +52,7 @@ Transport提供的方法有：
     write
     flush
 
-除了上面的传输接口，thrift还使用ServerTransport接口来接收或者创建原始传输对象。顾名思义，ServerTransport主要用于服务端，为到来的connection创建传输层对象。ServerTransport提供的方法有：
+除了上面的传输接口，Thrift还使用ServerTransport接口来接收或者创建原始传输对象。顾名思义，ServerTransport主要用于服务端，为到来的connection创建传输层对象。ServerTransport提供的方法有：
 
     open
     listen
@@ -66,7 +67,7 @@ Protocol定义内存数据结构到序列化映射机制。换句话说就是，
 `Thrift Protocol`是面向流的设计，因此在开始序列化之前，不需要知道字符串的长度或列表中的项目数量。Thrift支持的协议如下所示：
 
     binary：将字段的长度和类型编码，然后是字段的value
-    compact：见[THRIFT-110](https://issues.apache.org/jira/browse/THRIFT-110)
+    compact：见[Thrift-110](https://issues.apache.org/jira/browse/Thrift-110)
     json
 
 
@@ -112,13 +113,13 @@ Server将上述功能集中在一起：
 
 **Containers**
 
-thrift container是强类型的容器，与大多数的编程语言中的容器一致。thrift定义了三种容器：
+Thrift container是强类型的容器，与大多数的编程语言中的容器一致。Thrift定义了三种容器：
 
     list
     set
     map
 
-容器中的元素可以是任意的合法thrift type。另外，为了兼容各种语言，map和JSON中的key只能是base type。
+容器中的元素可以是任意的合法Thrift type。另外，为了兼容各种语言，map和JSON中的key只能是base type。
 
 **Exceptions**
 
@@ -126,16 +127,16 @@ exception功能上和struct类似，是为了和各种语言的异常处理机�
 
 **Services**
 
-Thrift使用type来定义service。service的定义在语义上等同于OOP中的接口定义。通过thrift编译器实现接口，并且生成客户端和服务端的全部功能。
+Thrift使用type来定义service。service的定义在语义上等同于OOP中的接口定义。通过Thrift编译器实现接口，并且生成客户端和服务端的全部功能。
 
-service由一组命名函数组成，每个函数都有一个参数列表和返回类型。除了thrift定义的其他type，void也是合法的函数返回类型。另外，oneway关键字也可以修饰到void函数，oneway将会生成不需要等待响应的代码。void函数也将会给client返回一个响应，来保证request成功到达服务端。然而对于oneway的函数调用，仅仅保证在transport层request成功。同一个client的oneway函数调用，在服务端会并行或者无序执行。
+service由一组命名函数组成，每个函数都有一个参数列表和返回类型。除了Thrift定义的其他type，void也是合法的函数返回类型。另外，oneway关键字也可以修饰到void函数，oneway将会生成不需要等待响应的代码。void函数也将会给client返回一个响应，来保证request成功到达服务端。然而对于oneway的函数调用，仅仅保证在transport层request成功。同一个client的oneway函数调用，在服务端会并行或者无序执行。
 
 
 ### 3.2 Namespace
 
 namespace用来声明，文件中定义的type应该在哪个namaspace/module/package等。
 
-例如Facebook's [fb303.thrift](https://git-wip-us.apache.org/repos/asf?p=thrift.git;a=blob_plain;f=contrib/fb303/if/fb303.thrift;hb=HEAD)namespace如下：
+例如Facebook's [fb303.Thrift](https://git-wip-us.apache.org/repos/asf?p=Thrift.git;a=blob_plain;f=contrib/fb303/if/fb303.Thrift;hb=HEAD)namespace如下：
 
 ```
 namespace java com.facebook.fb303
@@ -146,21 +147,21 @@ namespace netcore Facebook.FB303.Test
 
 ### 4.实践
 
-我们使用thrift的大体流程如下：
+我们使用Thrift的大体流程如下：
 
-    （1）服务端定义接口，生成idl文件
-    （2）服务端、客户端根据相应的语言，生成对应的类库
+    （1）服务端定义接口，设计idl文件
+    （2）服务端、客户端根据相应的语言，生成对应的类
     （3）服务端开发实现具体的服务并启动服务
     （4）客户端请求服务端
 
-具体实现可以参考[learnThrift](https://github.com/gongmh/learnThrift)。
+具体实现代码可以参考[learnThrift](https://github.com/gongmh/learnThrift)。
 
 #### 4.1 安装
 
 #### 4.2 IDL
 
 ```
-//learn.thrift
+//learn.Thrift
 namespace java com.gongmh.gen_java
 namespace php gen_php
 
@@ -200,15 +201,15 @@ service ThriftService {
 (1)生成服务端文件
 
 ```
-thrift -r --gen java learn.thrift
+Thrift -r --gen java learn.Thrift
 ```
 
-(2)项目中添加thrift依赖(maven)
+(2)项目中添加Thrift依赖(maven)
 
 ```
 <dependency>
-    <groupId>org.apache.thrift</groupId>
-    <artifactId>libthrift</artifactId>
+    <groupId>org.apache.Thrift</groupId>
+    <artifactId>libThrift</artifactId>
     <version>0.10.0</version>
 </dependency>
 ```
@@ -270,15 +271,15 @@ class LearnThriftImpl implements ThriftService.Iface{
 (1)生成服务端文件
 
 ```
-thrift -r --gen php learn.thrift
+Thrift -r --gen php learn.Thrift
 ```
 
-(2)项目中添加thrift依赖(composer)
+(2)项目中添加Thrift依赖(composer)
 
 ```
 {
     "require" : {
-        "apache/thrift" : ">= 0.10.0"    
+        "apache/Thrift" : ">= 0.10.0"    
     }    
 }
 ```
@@ -292,7 +293,7 @@ require_once('./vendor/autoload.php');
 require_once('./gen_php/Types.php');
 require_once('./gen_php/ThriftService.php');
 
-require_once('./vendor/apache/thrift/lib/php/lib/Thrift/ClassLoader/ThriftClassLoader.php');
+require_once('./vendor/apache/Thrift/lib/php/lib/Thrift/ClassLoader/ThriftClassLoader.php');
 
 use Thrift\ClassLoader\ThriftClassLoader;
 
