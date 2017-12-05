@@ -1,0 +1,214 @@
+---
+layout: post
+title:  "JSON and Go"
+date:  "2017-12-06 00:15:34 +800"
+category: go
+tags: go json
+keywords: go json
+description: ""
+---
+
+* TOC  
+{:toc}
+
+### 1. 引言
+
+解析JSON字符串，弱类型语言例如PHP来说`json_encode()`和`json_decode()`就能很好的完成功能，但是对于强类型语言Go来说，解析JSON字符串就需要考虑一些情况了，下面我们对Go对JSON的转换做一些介绍。
+
+### 2. 编码
+
+在Go中，使用`Marshal`函数进行JSON的编码：
+
+```go
+func Marshal(v interface{}) ([]byte, error)
+```
+
+如下示例所示，
+
+```go
+//Go data structure, Message
+type Message struct {
+    Name string
+    Body string
+    Time int64
+}
+
+//an instance of Message
+m := Message{"Alice", "Hello", 1294706395881547000}
+
+//JSON encode
+b, err := json.Marshal(m)
+
+//If all is well, err will be nil and b will be a []byte containing this JSON data
+b == []byte(`{"Name":"Alice","Body":"Hello","Time":1294706395881547000}`)
+```
+
+只有能够表示为合法JSON的数据结构才能被编码：
+
+* JSON对象只支持key为string，即Go的map类型为`map[string]T`（其中T为json包支持Go的任意类型）
+* channel、complex和function type不能被编码
+* 循环数据结构不能被编码（将会导致Marshal进入无限循环）
+* 指针将会被编码为指针所指的值（指针为nil的编码为null）
+
+json包只能访问结构体的可访问field（大写字母开头的field），因此结构体中只有可访问的field才能表示为JSON的输出。
+
+### 3. 已知类型解码
+
+解析已知类型的数据，我们可以使用`Unmarshal`函数：
+
+```go
+func Unmarshal(data []byte, v interface{}) error
+```
+
+如下示例所示，
+
+```go
+//create a place where the decoded data will be stored
+var m Message
+
+//call json.Unmarshal, passing it a []byte of JSON data and a pointer to m
+err := json.Unmarshal(b, &m)
+
+//If b contains valid JSON that fits in m, 
+//after the call err will be nil and the data
+//from b will have been stored in the struct m, 
+//as if by an assignment like
+m = Message{
+    Name: "Alice",
+    Body: "Hello",
+    Time: 1294706395881547000,
+}
+```
+
+对于JSON字符串中一个已知key`Foo`，Unmarshal将查找目标结构体的field：
+
+* 有`Foo`tag的可访问field
+* 名字为`Foo`的可访问field
+* 名字为`FOO`、`FoO`或其他与`Foo`匹配不区分大小写的可访问field
+
+对于JSON字符串不严格匹配定义的数据结构，Unmarshal只解析可以在目标数据结构中能找到的field。因此在下面的例子中，只有Name字段会被解析，而Food字段会被忽略。
+
+```go
+b := []byte(`{"Name":"Bob","Food":"Pickle"}`)
+var m Message
+err := json.Unmarshal(b, &m)
+```
+
+当我们想在一个很大的JSON结构中，只解析少量我们期望的field，这种行为是非常有用的。这也意味着目标结构中任何不能访问的field不会受到Unmarshal的影响。
+
+### 4. 任意类型解码
+
+对于未知的数据类型，json包使用`map[string]interface{}`和`[]interface{}`来存储未知类型的JSON对象和数组；也可以将任意合法的JSON字符串解析为`interface{}`。默认的Go类型为：
+
+* bool对应JSON的类型booleans
+* **float64对应JSON的类型numbers**
+* string对应JSON的类型strings
+* nil对应JSON的null
+
+如下示例所示，
+
+```go
+b := []byte(`{"Name":"Wednesday","Age":6,"Parents":["Gomez","Morticia"]}`)
+
+var f interface{}
+err := json.Unmarshal(b, &f)
+
+//f would be a map,
+//whose keys are strings 
+//and whose values are themselves stored as empty interface values
+/*
+f = map[string]interface{}{
+    "Name": "Wednesday",
+    "Age":  6,
+    "Parents": []interface{}{
+        "Gomez",
+        "Morticia",
+    },
+}
+*/
+for k, v := range m {
+    switch vv := v.(type) {
+    case string:
+        fmt.Println(k, "is string", vv)
+    case float64:
+        fmt.Println(k, "is float64", vv)
+    case []interface{}:
+        fmt.Println(k, "is an array:")
+        for i, u := range vv {
+            fmt.Println(i, u)
+        }
+    default:
+        fmt.Println(k, "is of a type I don't know how to handle")
+    }
+}
+
+/*
+output:
+Name is string Wednesday
+Age is float64 6
+Parents is an array:
+0 Gomez
+1 Morticia
+*/
+
+```
+
+### 5. 引用类型
+
+对于结构体中的 pointers、slices 和 maps ，Unmarshal将会分配存储结构并解析相应的引用类型。例如，如果JSON对象中存在Bar field，Unmarshal会new Bar结构并解析，否则Bar是nil指针。
+
+```go
+type Foo struct {
+    Bar *Bar
+}
+```
+
+### 6. 流数据编码和解码
+
+json包提供了Decoder和Encoder类型来支持通用的JSON数据的读写流，函数NewDecoder和NewEncoder分别处理 io.Reader 和 io.Writer 接口类型。
+
+```go
+func NewDecoder(r io.Reader) *Decoder
+func NewEncoder(w io.Writer) *Encoder
+```
+
+例如，从stdin中读入JSON对象，解析后移除除了Name之外的其他元素，然后输出到stdout中。
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "log"
+    "os"
+)
+
+func main() {
+    dec := json.NewDecoder(os.Stdin)
+    enc := json.NewEncoder(os.Stdout)
+    for {
+        var v map[string]interface{}
+        if err := dec.Decode(&v); err != nil {
+            log.Println(err)
+            return
+        }
+        for k := range v {
+            if k != "Name" {
+                delete(v, k)
+            }
+        }
+        if err := enc.Encode(&v); err != nil {
+            log.Println(err)
+        }
+    }
+}
+```
+
+在Go中，由于 Readers 和 Writers 无处不在，Encoder 和 Decoder 有很多的应用场景，例如HTTP链接的读写、WebSockets和file等。
+
+### 7. 参考
+
+1. [JSON官网](http://json.org/)
+2. [Go json package](https://golang.org/pkg/encoding/json/) 
+
+
