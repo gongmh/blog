@@ -94,7 +94,7 @@ var m Message
 err := json.Unmarshal(b, &m)
 ```
 
-当我们想在一个很大的JSON结构中，只解析少量我们期望的field，这种行为是非常有用的。这也意味着目标结构中任何不能访问的field不会受到Unmarshal的影响。
+当我们想在一个很大的JSON结构中，只解析少量我们期望的field，这种方式是非常有用的。这也意味着目标结构中任何不能访问的field不会受到Unmarshal的影响。
 
 ### 4. 任意类型解码
 
@@ -208,7 +208,8 @@ func main() {
 
 ### 7. 参考
 
-1. [JSON官网](http://json.org/)
+1. [json and go](https://blog.golang.org/json-and-go)
 2. [Go json package](https://golang.org/pkg/encoding/json/) 
+3. [JSON官网](http://json.org/)
 
 

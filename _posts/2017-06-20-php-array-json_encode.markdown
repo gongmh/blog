@@ -11,7 +11,7 @@ description: ""
 * TOC  
 {:toc}  
 
-在最近项目中，前后端联调的时候php接口返回数组json后的数据，有时候是数组，有的时候却是对象，导致前端解析的时候总是抱怨数据问题。今天就对这个问题进行梳理，
+在最近项目中，前后端联调的时候php接口返回数组json后的数据，有时候是数组，有的时候却是对象，导致前端解析的时候总是抱怨数据问题。今天就对这个问题进行梳理。（**已解决，json_encode时设置JSON_FORCE_OBJECT选项即可。**）
 
 ### 一、JSON介绍
 
@@ -53,5 +53,15 @@ description: ""
 也就是说php的数组做json_encode的时候，只有数组的下标是从0开始的连续整数，才会json为列表形式；其他情况都是对象形式。	
 
 因此，针对php数组json_encode时，需要数组形式的话就重新排序一下数组即可。
+
+
+当对php的数组进行json_encode的时候，可以设置option为JSON_FORCE_OBJECT，即可强制设置编码为JSON的对象。
+
+```php
+string json_encode ( mixed $value [, int $options = 0 [, int $depth = 512 ]] )
+```
+
+>[JSON_FORCE_OBJECT (integer)](http://php.net/manual/en/json.constants.php)
+Outputs an object rather than an array when a non-associative array is used. Especially useful when the recipient of the output is expecting an object and the array is empty. Available since PHP 5.3.0.
 
 
