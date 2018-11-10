@@ -15,7 +15,7 @@ timezone: Asia/Shanghai
 permalink: /:year/:month/:day/:title/
 
 # other links
-github_username:  gongmh
+github_username: gongmh
 email: pandergong@gmail.com
 
 description_footer: 本站记录我的沿途风景！
