@@ -8,7 +8,9 @@ echo $pwd/_config.yml
 sed -i 's/baseurl/# baseurl/g' _config.yml
 
 #2. generate static files
-jekyll g
+jekyll b
 
-#3. copy to web root dir
-mv _site /usr/share/nginx/html
+sleep 10
+
+#2. copy to web root dir
+cp -rf _site /home/gongmh/.site
