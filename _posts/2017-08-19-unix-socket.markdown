@@ -303,14 +303,14 @@ int getsockopt(int sockfd, int level, int option, void *restrict val, socklen_t 
 
 <div>
 	<div class="div-inline">
-		<img src="/blog/assets/unix_socket/tcp-socket-flow.png" style="width:450px" alt="tcp" />
+		<img src="{{site.baseurl}}/assets/unix_socket/tcp-socket-flow.png" style="width:450px" alt="tcp" />
 	</div>
 	<div class="div-inline">
-		<img src="/blog/assets/unix_socket/udp-socket-flow.png" style="width:450px" alt="udp" />
+		<img src="{{site.baseurl}}/assets/unix_socket/udp-socket-flow.png" style="width:450px" alt="udp" />
 	</div>
 </div>
 
-<!-- <img src="/blog/assets/unix_socket/udp-socket-flow.png" style="width:600px" alt="udp" />]( /blog/assets/unix_socket/udp-socket-flow.png ) -->
+<!-- <img src="{{site.baseurl}}/assets/unix_socket/udp-socket-flow.png" style="width:600px" alt="udp" />]( /blog/assets/unix_socket/udp-socket-flow.png ) -->
 
 
 

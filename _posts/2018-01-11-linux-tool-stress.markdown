@@ -84,14 +84,14 @@ $ stress -c 1
 
 可以看到cpu的stress进程已经占满了cpu
 
-<img src="/blog/assets/linux_stress/stress_cpu.png" style="width:700px" alt="stress_cpu" />
+<img src="{{site.baseurl}}/assets/linux_stress/stress_cpu.png" style="width:700px" alt="stress_cpu" />
 
 (2) mem负载
 
 ```
 $ stress --vm 1 --vm-bytes 800M --vm-hang 0 --vm-keep
 ```
-<img src="/blog/assets/linux_stress/stress_vm.png" style="width:700px" alt="stress_vm" />
+<img src="{{site.baseurl}}/assets/linux_stress/stress_vm.png" style="width:700px" alt="stress_vm" />
 
 (3) io负载
 
@@ -105,4 +105,4 @@ $ stress -i 1
 $ stress -d 1 
 ```
 
-<img src="/blog/assets/linux_stress/stress_hdd.png" style="width:700px" alt="stress_hdd" />
+<img src="{{site.baseurl}}/assets/linux_stress/stress_hdd.png" style="width:700px" alt="stress_hdd" />

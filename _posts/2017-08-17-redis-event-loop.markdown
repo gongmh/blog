@@ -186,7 +186,7 @@ int aeResizeSetSize(aeEventLoop *eventLoop, int setsize);
 
 对于redis的事件流程，简化为流程图更加直观明了，如图所示：
 
-[<img src="/blog/assets/redis_event_loop/redis-event-loop.png" style="width:1000px" alt="sds" />]( /blog/assets/redis_event_loop/redis-event-loop.png )
+[<img src="{{site.baseurl}}/assets/redis_event_loop/redis-event-loop.png" style="width:1000px" alt="sds" />]( /blog/assets/redis_event_loop/redis-event-loop.png )
 
 <!-- 1.socket
 2.IO多路复用程序

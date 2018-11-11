@@ -15,7 +15,7 @@ description: ""
 下面我们看看gitmoji的功能。gitmoji能够在commit信息中添加mojis图案，使得提交信息更容易辨识。
 
 <div class="div-inline">
-	<img src="/blog/assets/gitmoji/gitmoji_commit.png" style="width:450px" alt="gitmoji" />
+	<img src="{{site.baseurl}}/assets/gitmoji/gitmoji_commit.png" style="width:450px" alt="gitmoji" />
 </div>
 
 

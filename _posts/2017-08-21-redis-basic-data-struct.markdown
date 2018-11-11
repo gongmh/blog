@@ -48,7 +48,7 @@ struct __attribute__ ((__packed__)) sdshdr8 {
 
 我们以`sdshdr8`为例，如图介绍sds在内存中的结构：
 
-[<img src="/blog/assets/redis_basic_data_struct/redis-sds.png" style="width:1000px" alt="sds" />]( /blog/assets/redis_basic_data_struct/redis-sds.png )
+[<img src="{{site.baseurl}}/assets/redis_basic_data_struct/redis-sds.png" style="width:1000px" alt="sds" />]( /blog/assets/redis_basic_data_struct/redis-sds.png )
 
 另外实际上每个sds指针指向buf，因此sds也能像普通字符串一样处理。
 
