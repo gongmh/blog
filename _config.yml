@@ -6,8 +6,8 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: GongMH
-brief-intro: dev
+title: 博客
+brief-intro: 记录生活，记录工作。
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://www.gongmh.com" # the base hostname & protocol for your site
 timezone: Asia/Shanghai
@@ -18,7 +18,7 @@ permalink: /:year/:month/:day/:title/
 github_username: gongmh
 email: pandergong@gmail.com
 
-description_footer: 本站记录我的沿途风景！
+description_footer: 记录生活，记录工作。
 
 # comments
 # two ways to comment, only choose one, and use your own short name
