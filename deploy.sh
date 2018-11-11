@@ -13,4 +13,5 @@ jekyll b
 sleep 10
 
 #2. copy to web root dir
-cp -rf _site /home/gongmh/.site
+rm -r /home/gongmh/.site/*
+cp -rf _site/* /home/gongmh/.site
