@@ -14,6 +14,6 @@ type: page
 
 <!-- 写博客的目的是记录一些工作中遇到的问题，为以后的工作提升效率，规避雷区。 -->
 
-## Comments
+## 评论
 
 {% include comments.html %}

@@ -24,6 +24,6 @@ type: page
     3. 支持代码分享功能。
 
 
-## Comments
+## 评论
 
 {% include comments.html %}
