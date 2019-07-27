@@ -15,3 +15,5 @@ sleep 10
 #2. copy to web root dir
 rm -r /home/gongmh/.site/*
 cp -rf _site/* /home/gongmh/.site
+
+echo "deploy success"
