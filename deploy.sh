@@ -15,5 +15,6 @@ sleep 10
 #2. copy to web root dir
 rm -r /home/gongmh/.site/*
 cp -rf _site/* /home/gongmh/.site
+cp ads.txt /home/gongmh/.site
 
-echo "deploy success"
+echo "\033[31m Deploy success \033[0m"
