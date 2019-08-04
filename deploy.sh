@@ -10,7 +10,7 @@ sed -i 's/baseurl/# baseurl/g' _config.yml
 #2. generate static files
 jekyll b
 
-sleep 10
+sleep 5
 
 #2. copy to web root dir
 rm -r /home/gongmh/.site/*

@@ -9,7 +9,7 @@ author: gongmh
 
 
 <div class="post-table">
-	<table border="1" cellpadding="12" width="200" cellspacing="2">
+	<table border="1" cellpadding="12" width="500" cellspacing="2">
 		<tr> <th>序号</th> <th>书名</th>  <th>读完时间</th>  <th>读书渠道</th> </tr>
     	<tr> <td>1</td> <td>世界三部曲--巨人的陨落</td>  <td></td>  <td>微信读书</td> </tr>
     	<tr> <td>2</td> <td>世界三部曲--世界的凛冬</td>  <td></td>  <td>微信读书</td> </tr>
