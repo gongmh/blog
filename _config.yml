@@ -54,4 +54,4 @@ plugins: [jekyll-paginate]
 paginate: 6
 
 # google adsense
-google_adsense: ca-pub-4035145038623503
+#google_adsense: ca-pub-4035145038623503
