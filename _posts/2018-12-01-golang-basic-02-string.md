@@ -28,7 +28,7 @@ len(str)
 
 strings包中包含了很多字符串的操作，例如，取子串索引`Index*`，字符串切分`Split*`，大小写转换`ToUpper*`与`ToLower*`，去除字符`Trim*`，字符串替换`Replace`，以及字符串映射函数`Map`等。
 
-关于字符串相关操作的一些例子如下，也可以**[运行一下](http://www.gongmh.com/tools/sharecode?id=34jG_xgMR)**。
+关于字符串相关操作的一些例子如下，也可以**[运行一下](http://www.gongmh.com/tools/s?id=34jG_xgMR)**。
 
 ``` golang
 package main
@@ -336,7 +336,7 @@ s := strconv.FormatUint(42, 16)
 
 ## 4.5 `Quote`相关函数
 
-`Quote`将字符串转为转义字符串，**[运行一下](http://www.gongmh.com/tools/sharecode?id=Tc4O_xgMR)**。
+`Quote`将字符串转为转义字符串，**[运行一下](http://www.gongmh.com/tools/s?id=Tc4O_xgMR)**。
 
 ``` golang
 fmt.Printf("%#v\n", sc.QuoteToASCII(`Hello,  世界`))  //"\"Hello,  \\u4e16\\u754c\""
@@ -349,7 +349,7 @@ fmt.Printf("%#v\n", str)    //"Hello, 世界"
 
 ## 4.6 `strconv`常用例子
 
-`strconv`包中常见的例子，**[运行一下](http://www.gongmh.com/tools/sharecode?id=yLkc_bgGg)**。
+`strconv`包中常见的例子，**[运行一下](http://www.gongmh.com/tools/s?id=yLkc_bgGg)**。
 
 ``` golang
 package main

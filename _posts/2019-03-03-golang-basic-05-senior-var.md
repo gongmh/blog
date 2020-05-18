@@ -14,7 +14,7 @@ author: gongmh
 
 # 1. 数组(array)
 
-对`int32`的数组进行分析，**[运行一下](https://www.gongmh.com/tools/sharecode?id=vxoWk-RGR)**。
+对`int32`的数组进行分析，**[运行一下](https://www.gongmh.com/tools/s?id=vxoWk-RGR)**。
 
 ``` go
 package main
@@ -71,7 +71,7 @@ arrVar 第四个元素，地址=c00001605c，值: 4
 
 # 2. 切片(slice)
 
-仍然使用`int32`类型，对切片进行分析，**[运行一下](https://www.gongmh.com/tools/sharecode?id=hT-YkaRMR)**。
+仍然使用`int32`类型，对切片进行分析，**[运行一下](https://www.gongmh.com/tools/s?id=hT-YkaRMR)**。
 
 ``` go
 
@@ -115,7 +115,7 @@ type slice struct {
 }
 ```
 
-说明slice实际上是由一个指针和两个int变量组成，指针和int都是占8个字节，也就对应了上面的slice总共占用24字节。继续用`slice结构体`对切片进行分析，**[运行一下](https://www.gongmh.com/tools/sharecode?id=nBvFZaRGR)**。
+说明slice实际上是由一个指针和两个int变量组成，指针和int都是占8个字节，也就对应了上面的slice总共占用24字节。继续用`slice结构体`对切片进行分析，**[运行一下](https://www.gongmh.com/tools/s?id=nBvFZaRGR)**。
 
 ``` go
 package main
@@ -161,7 +161,7 @@ sliceVar 中指针指向的值: [4]int32{98, 2, 3, 4}
 
 # 3. 字符串(string)
 
-字符串的结构类似切片，不过字符串是不可被改变的，也就只有指针和长度。**[运行一下](https://www.gongmh.com/tools/sharecode?id=XUFrZ-RMg)**。
+字符串的结构类似切片，不过字符串是不可被改变的，也就只有指针和长度。**[运行一下](https://www.gongmh.com/tools/s?id=XUFrZ-RMg)**。
 
 
 ```

@@ -13,7 +13,7 @@ author: gongmh
 
 在内存中，基础变量是若干个连续地址组成的内存空间。指针指向低地址，向高地址延展。并且在计算机的内存中通常使用小端序存储，与网络流中的大端序不同的是，小端序内存低地址空间存储变量低位，内存的高地址空间存储变量的高位。
 
-使用`unsafe`包中的工具，可以对内存进行操作。下面通过`int32`，进行分析基础变量在内存中怎么存储，**[运行一下](https://www.gongmh.com/tools/sharecode?id=YvK86bRMg)**。
+使用`unsafe`包中的工具，可以对内存进行操作。下面通过`int32`，进行分析基础变量在内存中怎么存储，**[运行一下](https://www.gongmh.com/tools/s?id=YvK86bRMg)**。
 
 ``` go
 package main

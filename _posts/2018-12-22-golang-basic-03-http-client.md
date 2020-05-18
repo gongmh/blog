@@ -18,7 +18,7 @@ client的返回值，是response的byte数组，根据实际情况做解析处�
 
 # 2. httpGet
 
-HttpGet运行实例，**[运行一下](http://www.gongmh.com/tools/sharecode?id=30G__xgGR)**。
+HttpGet运行实例，**[运行一下](http://www.gongmh.com/tools/s?id=30G__xgGR)**。
 
 ``` golang
 func main() {
@@ -53,7 +53,7 @@ func main() {
 
 # 3. httpPost
 
-HttpPost运行实例，**[运行一下](http://www.gongmh.com/tools/sharecode?id=k21XlxgGg)**。
+HttpPost运行实例，**[运行一下](http://www.gongmh.com/tools/s?id=k21XlxgGg)**。
 
 ``` golang
 func main() {
