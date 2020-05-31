@@ -31,6 +31,8 @@ type: page
         <tr> <td>17</td>    <td>天生就会跑</td>                         <td>2019-08</td>       <td>微信读书</td> </tr>
         <tr> <td>18</td>    <td>寻路中国：从乡村到工厂的自驾之旅</td>      <td>2019-09</td>       <td>微信读书</td> </tr>
         <tr> <td>19</td>    <td>脂砚斋评石头记</td>                      <td>2020-04</td>       <td>微信读书</td> </tr>
+        <tr> <td>20</td>    <td>中国古代文化常识</td>                    <td>2020-05</td>       <td>实体书</td> </tr>
+        <tr> <td>21</td>    <td>天才在左疯子在右</td>                    <td>读书中</td>         <td>实体书</td> </tr>
 	</table>
 </div>
 
