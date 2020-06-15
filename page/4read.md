@@ -10,7 +10,7 @@ type: page
 {:toc}
 
 <div class="post-table">
-	<table border="1" cellpadding="12" width="700" cellspacing="2">
+	<table border="1" cellpadding="12" width="100%" cellspacing="2">
 		<tr> <th>序号</th>   <th>书名</th>                             <th>读完时间</th>        <th>读书渠道</th> </tr>
         <tr> <td>1</td>     <td>白夜行</td>                            <td>2017-01-08</td>    <td>微信读书</td> </tr>
         <tr> <td>2</td>     <td>长安十二时辰</td>                       <td>2018-03</td>       <td>微信读书</td> </tr>
