@@ -13,7 +13,7 @@ type: page
 	<table border="1" cellpadding="12" width="100%" cellspacing="2">
 	<tr> <th>序号</th>   <th>书名</th>                             <th>读完时间</th>        <th>读书渠道</th> </tr>
         <tr> <td>25</td>    <td>我在印度的701天</td>                    <td>2021-02</td>       <td>实体书</td> </tr>
-        <tr> <td>24</td>    <td>人生海海</td>                         <td>2020-02</td>       <td>微信读书</td> </tr>
+        <tr> <td>24</td>    <td>人生海海</td>                         <td>2021-02</td>       <td>微信读书</td> </tr>
         <tr> <td>23</td>    <td>夹边沟记事</td>                         <td>2021-01</td>       <td>微信读书</td> </tr>
         <tr> <td>22</td>    <td>这里是中国</td>                         <td>2020-06</td>       <td>微信读书</td> </tr>
         <tr> <td>21</td>    <td>天才在左疯子在右</td>                    <td>读书中</td>         <td>实体书</td> </tr>
